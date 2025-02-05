@@ -119,7 +119,7 @@ const InteractiveJourney = () => {
     <div className="w-full max-w-6xl mx-auto p-8 bg-white rounded-lg shadow-lg relative overflow-hidden">
       <div className="text-center mb-8">
         <h1 className="text-4xl font-bold text-gray-800 mb-2">GuestTouch <span className="text-blue-500">Messaging</span> Platform</h1>
-        <div className="text-gray-600">All In One Guest Messaging Platform</div>
+        <div className="text-gray-600">Example of Guest Journey Messages</div>
       </div>
       
       {showConfetti && <Confetti />}
