@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { MessageSquare, Hotel, Key, Home, CheckSquare, Heart } from 'lucide-react';
 
-// Confetti animation component
 const Confetti = () => {
   const colors = ['#FFD700', '#FF69B4', '#4169E1', '#32CD32', '#FF4500'];
   const pieces = Array.from({ length: 50 });
@@ -32,15 +31,8 @@ const Confetti = () => {
 };
 
 const MessagePreview = ({ message, isReceived, animate }) => (
-  <div 
-    className={`flex ${isReceived ? 'justify-start' : 'justify-end'} mb-4 
-      ${animate ? 'animate-bounce-in' : ''}`}
-  >
-    <div className={`max-w-xs p-3 rounded-lg transform transition-all duration-300 hover:scale-102
-      ${isReceived 
-        ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-tl-none' 
-        : 'bg-gradient-to-r from-gray-100 to-gray-200 rounded-tr-none'
-      }`}>
+  <div className={`flex ${isReceived ? 'justify-start' : 'justify-end'} mb-4 ${animate ? 'animate-bounce-in' : ''}`}>
+    <div className={`max-w-xs p-3 rounded-lg transform transition-all duration-300 hover:scale-102 ${isReceived ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-tl-none' : 'bg-gradient-to-r from-gray-100 to-gray-200 rounded-tr-none'}`}>
       <p className="text-sm">{message}</p>
     </div>
   </div>
@@ -48,20 +40,18 @@ const MessagePreview = ({ message, isReceived, animate }) => (
 
 const StageIcon = ({ stage, isActive }) => {
   const icons = {
-    0: MessageSquare,  // Booking confirmation
-    1: Hotel,          // Pre-arrival
-    2: Key,            // Check-in
-    3: Home,           // In-stay
-    4: CheckSquare,    // Check-out
-    5: Heart           // Post-stay feedback
+    0: MessageSquare,
+    1: Hotel,
+    2: Key,
+    3: Home,
+    4: CheckSquare,
+    5: Heart
   };
   
   const Icon = icons[stage];
   
   return (
-    <div className={`p-2 rounded-full transition-all duration-300 transform
-      ${isActive ? 'scale-110 bg-blue-500 text-white' : 'bg-gray-100 text-gray-500'}
-    `}>
+    <div className={`p-2 rounded-full transition-all duration-300 transform ${isActive ? 'scale-110 bg-blue-500 text-white' : 'bg-gray-100 text-gray-500'}`}>
       <Icon size={20} />
     </div>
   );
@@ -127,23 +117,16 @@ const InteractiveJourney = () => {
 
   return (
     <div className="w-full max-w-6xl mx-auto p-8 bg-white rounded-lg shadow-lg relative overflow-hidden">
-      {/* GuestTouch Branding */}
       <div className="text-center mb-8">
-        <h1 className="text-4xl font-bold text-gray-800 mb-2">
-          GuestTouch <span className="text-blue-500">Messaging</span> Platform
-        </h1>
+        <h1 className="text-4xl font-bold text-gray-800 mb-2">GuestTouch <span className="text-blue-500">Messaging</span> Platform</h1>
         <div className="text-gray-600">All In One Guest Messaging Platform</div>
       </div>
       
       {showConfetti && <Confetti />}
       
-      {/* Progress bar with floating animation */}
       <div className="mb-12 relative">
         <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-          <div 
-            className="h-full bg-gradient-to-r from-blue-500 to-blue-600 rounded-full transition-all duration-500 ease-out"
-            style={{ width: `${(currentStage / (stages.length - 1)) * 100}%` }}
-          />
+          <div className="h-full bg-gradient-to-r from-blue-500 to-blue-600 rounded-full transition-all duration-500 ease-out" style={{ width: `${(currentStage / (stages.length - 1)) * 100}%` }} />
         </div>
         
         <div className="absolute top-0 w-full flex justify-between transform -translate-y-1/2">
@@ -158,19 +141,11 @@ const InteractiveJourney = () => {
               }}
               className="group relative"
             >
-              <div className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300
-                ${index <= currentStage ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-500'}
-                ${index === currentStage ? 'ring-4 ring-blue-200 animate-pulse' : ''}
-                ${hover === index ? 'transform scale-110' : ''}
-                hover:shadow-lg cursor-pointer`}
-              >
+              <div className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 ${index <= currentStage ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-500'} ${index === currentStage ? 'ring-4 ring-blue-200 animate-pulse' : ''} ${hover === index ? 'transform scale-110' : ''} hover:shadow-lg cursor-pointer`}>
                 <StageIcon stage={index} isActive={index <= currentStage} />
               </div>
               
-              {/* Floating tooltip */}
-              <div className={`absolute -bottom-12 left-1/2 transform -translate-x-1/2 
-                transition-all duration-300 pointer-events-none
-                ${hover === index ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}>
+              <div className={`absolute -bottom-12 left-1/2 transform -translate-x-1/2 transition-all duration-300 pointer-events-none ${hover === index ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}>
                 <div className="bg-gray-800 text-white text-xs py-1 px-2 rounded whitespace-nowrap">
                   {stages[index].title}
                 </div>
@@ -180,7 +155,6 @@ const InteractiveJourney = () => {
         </div>
       </div>
 
-      {/* Content grid with hover effects */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="space-y-6">
           <div className="text-center transform transition-all duration-300 hover:scale-105">
@@ -191,19 +165,13 @@ const InteractiveJourney = () => {
 
           <div className="grid grid-cols-1 gap-4">
             {stages[currentStage].actions.map((action, index) => (
-              <div
-                key={index}
-                className="p-4 bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg border border-gray-200 
-                  transform transition-all duration-300 hover:scale-105 hover:shadow-lg hover:rotate-1
-                  cursor-pointer"
-              >
+              <div key={index} className="p-4 bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg border border-gray-200 transform transition-all duration-300 hover:scale-105 hover:shadow-lg hover:rotate-1 cursor-pointer">
                 <p className="text-gray-700 font-medium text-center">{action}</p>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Animated message preview */}
         <div className="relative">
           <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-3xl transform rotate-3 scale-105"/>
           <div className="relative bg-white rounded-2xl shadow-lg p-6">
@@ -228,25 +196,18 @@ const InteractiveJourney = () => {
         </div>
       </div>
 
-      {/* Animated navigation buttons */}
       <div className="flex justify-between mt-12">
         <button
           onClick={() => setCurrentStage(Math.max(0, currentStage - 1))}
           disabled={currentStage === 0}
-          className={`px-6 py-2 rounded-full font-medium transition-all duration-300 transform hover:-translate-x-1
-            ${currentStage === 0 
-              ? 'bg-gray-100 text-gray-400 cursor-not-allowed' 
-              : 'bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:shadow-lg'}`}
+          className={`px-6 py-2 rounded-full font-medium transition-all duration-300 transform hover:-translate-x-1 ${currentStage === 0 ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:shadow-lg'}`}
         >
           ← Previous
         </button>
         <button
           onClick={() => setCurrentStage(Math.min(stages.length - 1, currentStage + 1))}
           disabled={currentStage === stages.length - 1}
-          className={`px-6 py-2 rounded-full font-medium transition-all duration-300 transform hover:translate-x-1
-            ${currentStage === stages.length - 1 
-              ? 'bg-gray-100 text-gray-400 cursor-not-allowed' 
-              : 'bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:shadow-lg'}`}
+          className={`px-6 py-2 rounded-full font-medium transition-all duration-300 transform hover:translate-x-1 ${currentStage === stages.length - 1 ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:shadow-lg'}`}
         >
           Next →
         </button>
